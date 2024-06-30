@@ -1,0 +1,52 @@
+pipeline {
+    agent {
+        label 'ghost-linux'
+    }
+
+    environment {
+        DOCKER_IMAGE = 'nextjs-app-2'
+    }
+    
+    stages {
+        stage('Clone Repository') {
+            steps {
+                script {
+                    // Clean up previous Docker containers and images
+                    sh 'docker-compose down --rmi all --remove-orphans'
+                    
+                    // Clone the GitHub repository
+                    git url: 'https://github.com/imaltaf/enji.dev.git', branch: 'main'
+                }
+            }
+        }
+        
+        stage('Build') {
+            steps {
+                script {
+                    // Build the Docker image for Next.js app
+                    sh 'docker-compose up --build'
+                }
+            }
+        }
+        
+
+        stage('Deploy') {
+            steps {
+                
+                
+                // Wait for services to start (adjust as needed based on your app's startup time)
+                sh 'sleep 30'
+                
+                // Print Docker logs for verification
+                sh 'docker-compose logs'
+            }
+        }
+    }
+    
+    post {
+        always {
+            // Clean up Docker resources after the pipeline completes
+            sh 'docker-compose down --rmi all --remove-orphans'
+        }
+    }
+}
