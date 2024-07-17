@@ -1,0 +1,64 @@
+---
+title: Fuzzing with FFUF
+description: ffuf is a fast web fuzzer written in Go,  efficient web application penetration
+lang: en
+date: '2024-07-17'
+tags:
+  - FFUF
+  - Fuzzing
+  - bugbounty
+category: Tools
+caption: Bug-Hunting
+---
+
+import { DnD, Dont, Do } from '@/components/mdx/TIL';
+import { QuickView } from '@/components/mdx/Link';
+import CodeGroup from '@/components/mdx/CodeGroup';
+
+## FFUF
+
+- ffuf: This is the command to run ffuf, a fast web fuzzer written in Go.
+
+## Installation
+
+```bash
+go install github.com/ffuf/ffuf/v2@latest
+```
+
+```bash
+git clone https://github.com/ffuf/ffuf ; cd ffuf ; go get ; go build
+```
+
+## Useful Resources
+
+Here are some useful resources for your web fuzzing and security tasks:
+
+- [Assetnote Wordlists](https://wordlists-cdn.assetnote.io/)
+
+## wordlist
+
+```bash
+wget https://github.com/Bo0oM/fuzz.txt/blob/master/fuzz.txt
+```
+
+```sh
+wget https://wordlists-cdn.assetnote.io/data/automated/httparchive_directories_1m_2024_05_28.txt
+```
+
+## Usage
+
+```bash
+ffuf -w /path/to/wordlist -u https://target/FUZZ
+```
+
+```sh
+ffuf -w /home/attack-ship/wordlists/fuzz.txt -u example.com/FUZZ -ac -o /home/attack-ship/bugbounty/zoho.com/fuff-output.txt
+```
+
+```sh
+ffuf —w ~/wordlist/data/automated/httparchive_directories_lm_2024_85_28.txt -u https://splunk-shc.security.k8s.tinderops.net/FUZZ -fs 110 -mc all
+```
+
+```sh
+ffuf -H User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36 -w in/recursively-cat-all-1/output.txt -u in/file-splitter-1:item -r -sf -ac -t 50 -o out/ffuf-2/item/output.txt
+```
