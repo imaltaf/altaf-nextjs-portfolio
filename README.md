@@ -51,3 +51,9 @@ pnpm dev
 ```
 
 Now, your project should be up and running smoothly!
+
+## Docker build
+
+To build the docker image, run the following command:
+
+docker-compose up --build -d
