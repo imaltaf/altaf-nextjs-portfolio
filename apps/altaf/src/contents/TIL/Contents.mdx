@@ -1,5 +1,42 @@
 import TIL from '@/components/mdx/TIL';
 
+<TIL.Items date="2024-07-18">
+
+  <TIL.Item>
+    
+    ## Fuzzing for Hidden dir and files
+
+    <TIL.ItemTags>
+      <TIL.ItemTag>Fuzzing</TIL.ItemTag>
+      <TIL.ItemTag>ffuf</TIL.ItemTag>
+      <TIL.ItemTag>bugbounty</TIL.ItemTag>
+    </TIL.ItemTags>
+
+    ```sh
+    ffuf -H User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36 -w in/recursively-cat-all-1/output.txt -u in/file-splitter-1:item -r -sf -ac -t 50 -o out/ffuf-2/item/output.txt
+
+    ```
+
+    [Official Docs](https://github.com/ffuf/ffuf)
+
+   <TIL.DnD>
+
+      <TIL.Do>
+        ```css
+            ffuf: A fast web fuzzer written in Go.
+            -u: This is the URL to fuzz.
+            -w: This is the wordlist to use.
+            -X: This is the HTTP method to use.
+            -e: This is the extension to use.
+            -H: This is the header to use.
+        ```
+      </TIL.Do>
+    </TIL.DnD>
+
+  </TIL.Item>
+
+</TIL.Items>
+
 <TIL.Items date="2023-01-29">
 
   <TIL.Item>
