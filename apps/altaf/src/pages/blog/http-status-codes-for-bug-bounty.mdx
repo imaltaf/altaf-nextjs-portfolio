@@ -1,0 +1,98 @@
+---
+title: Understanding HTTP Status Codes for Bug Bounty Hunters
+description: A comprehensive guide to HTTP status codes and their importance in web application penetration testing
+lang: en
+date: '2024-07-19'
+tags:
+  - HTTP Status Codes
+  - Web Security
+  - bugbounty
+  - Penetration Testing
+category: Guides
+caption: Bug-Hunting
+---
+
+import { DnD, Dont, Do } from '@/components/mdx/TIL';
+import { QuickView } from '@/components/mdx/Link';
+import CodeGroup from '@/components/mdx/CodeGroup';
+
+## Understanding HTTP Status Codes for Bug Bounty Hunters
+
+As a bug bounty hunter, understanding HTTP status codes is crucial. These codes are responses from servers indicating the status of the request made by a client (like your browser or a tool you’re using). Knowing what these status codes mean can help you identify potential vulnerabilities and issues in web applications.
+
+## 1xx: Informational Responses
+
+These codes indicate that the server has received the request and is continuing the process.
+
+- **100 Continue**: The server has received the initial part of the request and the client should continue with the request.
+- **101 Switching Protocols**: The requester has asked the server to switch protocols and the server has agreed to do so.
+
+## 2xx: Success
+
+These codes indicate that the request was successfully received, understood, and accepted.
+
+- **200 OK**: The request was successful, and the server has returned the requested resource.
+- **201 Created**: The request was successful and a new resource was created as a result.
+- **202 Accepted**: The request has been accepted for processing, but the processing is not yet complete.
+- **204 No Content**: The server successfully processed the request, but is not returning any content.
+
+## 3xx: Redirection
+
+These codes indicate that the client must take additional action to complete the request.
+
+- **301 Moved Permanently**: The requested resource has been moved to a new URL permanently.
+- **302 Found**: The requested resource is temporarily available at a different URL.
+- **304 Not Modified**: The resource has not been modified since the last request.
+
+## 4xx: Client Errors
+
+These codes indicate that there was an error in the request made by the client.
+
+- **400 Bad Request**: The server cannot process the request due to a client error.
+- **401 Unauthorized**: Authentication is required and has failed or has not yet been provided.
+- **403 Forbidden**: The server understands the request, but refuses to authorize it.
+- **404 Not Found**: The requested resource could not be found.
+- **405 Method Not Allowed**: The request method is not supported for the requested resource.
+- **429 Too Many Requests**: The user has sent too many requests in a given amount of time ("rate limiting").
+
+## 5xx: Server Errors
+
+These codes indicate that the server failed to fulfill a valid request.
+
+- **500 Internal Server Error**: The server encountered an unexpected condition that prevented it from fulfilling the request.
+- **501 Not Implemented**: The server does not support the functionality required to fulfill the request.
+- **502 Bad Gateway**: The server received an invalid response from the upstream server.
+- **503 Service Unavailable**: The server is currently unavailable (because it is overloaded or down for maintenance).
+- **504 Gateway Timeout**: The server did not receive a timely response from the upstream server.
+
+## Importance of Status Codes in Bug Bounty
+
+### Identifying Issues
+
+- **401 Unauthorized and 403 Forbidden**: These codes can indicate potential issues with authentication and authorization mechanisms.
+- **404 Not Found**: While common, frequent 404 errors might indicate broken links or improper handling of resources.
+- **500 Internal Server Error**: This often points to misconfigurations or unhandled exceptions in the server’s code, which can be a rich area for discovering vulnerabilities.
+
+### Detecting Redirection Issues
+
+- **301 Moved Permanently and 302 Found**: These can help in identifying redirection loops or potential open redirect vulnerabilities.
+
+### Monitoring and Rate Limiting
+
+- **429 Too Many Requests**: Understanding rate limiting responses can help in adjusting your testing frequency to avoid being blocked.
+
+## Practical Tips
+
+- **Logging Status Codes**: Always log the status codes returned by your requests to help analyze the behavior of the web application.
+- **Automated Tools**: Tools like Burp Suite, OWASP ZAP, and `ffuf` can help automate the detection and logging of status codes during your testing.
+- **Custom Scripts**: Write custom scripts to handle specific status codes, for example, retrying on 429 or logging detailed information on 500 errors.
+
+## Conclusion
+
+Mastering HTTP status codes is a fundamental skill for any bug bounty hunter. By understanding what these codes mean and how to interpret them, you can more effectively identify and exploit vulnerabilities in web applications. Keep this cheat sheet handy during your bug bounty hunting sessions to ensure you're making the most of the information provided by these status codes.
+
+Happy hunting!
+
+---
+
+For more advanced tools and resources, visit [G-DorksFinder](https://gdorks.imaltaf.site/) and enhance your bug bounty toolkit!
