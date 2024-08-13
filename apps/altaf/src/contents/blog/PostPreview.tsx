@@ -11,8 +11,7 @@ import type { TPostFrontMatter } from '@/types';
 
 type PostPreviewProps = TPostFrontMatter & {
   slug: string;
-  views: number;
-  shares: number;
+
   pinned?: boolean;
 };
 
@@ -22,8 +21,7 @@ function PostPreview({
   date,
   slug,
   lang,
-  views,
-  shares,
+
   pinned = false,
 }: PostPreviewProps) {
   return (
@@ -116,21 +114,6 @@ function PostPreview({
           )}
         >
           <InsightIcon className={clsx('-mt-0.5 h-4 w-4')} />
-          <span className={clsx('flex gap-1.5')}>
-            <span
-              className={clsx('flex items-center gap-1.5')}
-              title="Number of view(s)"
-            >
-              <CountUp from={0} to={views} /> Views
-            </span>
-            <span>&middot;</span>
-            <span
-              className={clsx('flex items-center gap-1.5')}
-              title="Number of share(s)"
-            >
-              <CountUp from={0} to={shares} /> Shares
-            </span>
-          </span>
         </div>
         <div
           className={clsx(

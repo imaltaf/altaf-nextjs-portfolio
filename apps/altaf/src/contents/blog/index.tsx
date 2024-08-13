@@ -73,25 +73,13 @@ function BlogContents({ posts }: BlogContentsProps) {
                   date={pinnedPost.date}
                   lang={pinnedPost.lang}
                   tags={pinnedPost.tags}
-                  views={pinnedPost.views}
-                  shares={pinnedPost.shares}
                 />
               </div>
             </div>
           )}
 
           {postsPreview.map(
-            ({
-              slug,
-              category,
-              title,
-              description,
-              date,
-              lang,
-              tags,
-              views,
-              shares,
-            }) => (
+            ({ slug, category, title, description, date, lang, tags }) => (
               <div
                 key={slug}
                 className={clsx(
@@ -115,8 +103,6 @@ function BlogContents({ posts }: BlogContentsProps) {
                     date={date}
                     lang={lang}
                     tags={tags}
-                    views={views}
-                    shares={shares}
                   />
                 </div>
               </div>
