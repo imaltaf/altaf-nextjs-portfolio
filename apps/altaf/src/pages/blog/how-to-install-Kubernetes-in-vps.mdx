@@ -1,0 +1,126 @@
+---
+title: Kubernetes on VPS,, A Step-by-Step Guide
+description: we'll guide you through the process of installing Kubernetes on a Virtual Private Server (VPS). Kubernetes,
+lang: en
+date: '2024-08-30'
+tags:
+  - Kubernetes
+  - VPS
+  - DevOps
+  - CloudComputing
+category: Guides
+caption: DevSecOps
+---
+
+## How to Install Kubernetes on a VPS
+
+Installing Kubernetes on a VPS involves several steps, including setting up the operating system, installing Docker, configuring Kubernetes, and initializing the cluster. This guide will walk you through each step.
+
+## Prerequisites
+
+Before you begin, ensure you have the following:
+
+- A VPS with at least 2 CPU cores and 2GB of RAM (for a single-node cluster).
+- Access to the VPS with root or sudo privileges.
+- A stable internet connection.
+
+## Step 1: Update the System
+
+Start by updating your VPS to ensure all packages are up to date.
+
+```bash
+sudo apt-get update && sudo apt-get upgrade -y
+```
+
+## Step 2: Install Docker
+
+```bash
+sudo apt-get install -y apt-transport-https ca-certificates curl gnupg lsb-release
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+```
+
+```bash
+sudo systemctl enable docker
+sudo systemctl start docker
+```
+
+## Step 3: Install Kubernetes Components
+
+### Next, install kubeadm, kubelet, and kubectl:
+
+```bash
+sudo apt-get install -y apt-transport-https ca-certificates curl
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update
+```
+
+```bash
+sudo apt-get install -y kubelet kubeadm kubectl
+```
+
+```bash
+sudo apt-mark hold kubelet kubeadm kubectl
+```
+
+## Step 4: Disable Swap
+
+### Kubernetes requires that swap is disabled. To disable swap, run:
+
+```bash
+sudo swapoff -a
+sudo sed -i '/ swap / s/^/#/' /etc/fstab
+```
+
+## Step 5: Initialize Kubernetes
+
+### Initialize Kubernetes by running the following command:
+
+```bash
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16
+```
+
+Once the initialization completes, you'll see a kubeadm join command. Copy it, as you’ll need it later to add nodes to your cluster.
+
+## Step 6: Configure kubectl
+
+### Configure kubectl to use the cluster by running:
+
+```bash
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
+
+## Step 7: Install a Pod Network Add-On
+
+### Install a pod network add-on. We will use Calico in this example:
+
+```bash
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+```
+
+## Step 8: Join Additional Nodes (Optional)
+
+### If you have additional nodes to add to your cluster, run the kubeadm join command
+
+```bash
+sudo kubeadm join <master-node-ip>:6443 --token <token> --discovery-token-ca-cert-hash sha256:<hash>
+```
+
+## Step 9: Verify the Cluster
+
+### Verify that your cluster is up and running by running:
+
+```bash
+kubectl get nodes
+```
+
+## Conclusion
+
+Congratulations! You have successfully set up a Kubernetes cluster on your Ubuntu 20.04 server. You
+
+### This guide covers the essential steps for installing Kubernetes on a VPS. It assumes the user is familiar with basic Linux commands and has root access to the VPS.
