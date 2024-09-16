@@ -2,18 +2,18 @@
   "name": "imaltaf",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "lint:all": "concurrently \"yarn:lint\" \"yarn:lint:types\" \"yarn:lint:style\"",
-    "lint:types": "tsc --noEmit",
-    "lint:style": "prettier --check .",
-    "analyze": "cross-env ANALYZE=true yarn build",
-    "postbuild": "next-sitemap",
-    
-  },
+"scripts": {
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start",
+  "lint": "next lint",
+  "lint:all": "concurrently \"yarn:lint\" \"yarn:lint:types\" \"yarn:lint:style\"",
+  "lint:types": "tsc --noEmit",
+  "lint:style": "prettier --check .",
+  "analyze": "cross-env ANALYZE=true yarn build",
+  "postbuild": "next-sitemap"
+},
+
   "dependencies": {
     "@headlessui/react": "^1.7.7",
     "@headlessui/tailwindcss": "^0.1.2",
