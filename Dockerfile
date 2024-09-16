@@ -19,5 +19,6 @@ COPY . .
 # Expose the port the app runs on
 EXPOSE 3000
 
-# Command to run the development server
-CMD ["pnpm", "dev"]
+
+# Set the command to run the app in development mode
+CMD ["pnpm", "run", "dev"]
