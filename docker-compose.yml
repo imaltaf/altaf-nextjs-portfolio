@@ -8,5 +8,7 @@ services:
     ports:
       - '6905:3000'
     restart: unless-stopped
+    environment:
+      TURBO_FORCE: 'true' # Avoid caching issues
     command: >
-      sh -c "pnpm install && pnpm run dev"
+      sh -c "pnpm install --frozen-lockfile && pnpm run dev"
