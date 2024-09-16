@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - '3000:3000'
+      - '6905:3000'
     restart: unless-stopped
     command: >
       sh -c "pnpm install && pnpm run dev"
